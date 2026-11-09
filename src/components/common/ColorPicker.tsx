@@ -8,7 +8,7 @@ interface ColorPickerProps {
 }
 
 const MATERIAL_SWATCHES = [
-  '#000000', '#FFFFFF', '#6750A4', '#D0BCFF', '#2196F3',
+  '#000000', '#FFFFFF', '#3489eb', '#E6F1FD', '#2196F3',
   '#00BCD4', '#009688', '#4CAF50', '#8BC34A', '#FFEB3B',
   '#FF9800', '#FF5722', '#E91E63', '#9C27B0',
 ];
@@ -35,7 +35,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
         <input
           type="color"
-          value={color.startsWith('#') && color.length === 7 ? color : '#6750A4'}
+          value={color.startsWith('#') && color.length === 7 ? color : '#3489eb'}
           onChange={(e) => onChange(e.target.value, alpha)}
           style={{
             width: '32px',

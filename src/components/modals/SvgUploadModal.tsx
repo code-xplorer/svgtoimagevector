@@ -129,7 +129,7 @@ export const SvgUploadModal: React.FC<SvgUploadModalProps> = ({
                 rows={10}
                 value={pastedSvg}
                 onChange={(e) => setPastedSvg(e.target.value)}
-                placeholder="<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>&#10;  <path d='...' fill='#6750A4' />&#10;</svg>"
+                placeholder="<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>&#10;  <path d='...' fill='#3489eb' />&#10;</svg>"
                 style={{ fontFamily: 'var(--font-family-mono)', fontSize: '12px', resize: 'vertical' }}
               />
               <button
