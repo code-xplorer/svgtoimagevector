@@ -297,52 +297,33 @@
   box-shadow: 0 0 0 1px var(--md-sys-color-primary);
 }
 
-.preview-divider {
-  width: 1px;
-  height: 18px;
-  background-color: var(--md-sys-color-outline-variant);
-}
-
-.preview-zoom-group {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-}
-
-.zoom-percent-btn {
-  font-size: 11px;
-  font-weight: 600;
-  font-family: var(--font-family-mono);
-  padding: 3px 6px;
-  border-radius: var(--md-sys-shape-corner-xs);
-  color: var(--md-sys-color-on-surface);
-  background: transparent;
-  cursor: pointer;
-}
-
-.zoom-percent-btn:hover {
-  background-color: var(--md-sys-color-surface-container-high);
-}
-
 .preview-viewport {
   flex: 1;
   min-height: 280px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: auto;
+  overflow: hidden;
   position: relative;
-  padding: 24px;
+  padding: 32px;
 }
 
 .preview-scaler {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  height: 100%;
+  max-width: 260px;
+  max-height: 260px;
 }
 
 .preview-scaler svg {
+  width: 100%;
+  height: 100%;
+  max-width: 240px;
+  max-height: 240px;
+  object-fit: contain;
   display: block;
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.12));
 }

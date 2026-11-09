@@ -20,13 +20,11 @@ export const MainLayout: React.FC = () => {
     config,
     activeTab,
     previewBg,
-    previewZoom,
     currentCode,
     loadSvg,
     updateConfig,
     setActiveTab,
     setPreviewBg,
-    setPreviewZoom,
   } = useConverterState();
 
   // Apply theme attribute to document element
@@ -67,9 +65,7 @@ export const MainLayout: React.FC = () => {
             document={document}
             rawSvg={rawSvg}
             previewBg={previewBg}
-            previewZoom={previewZoom}
             onSetPreviewBg={setPreviewBg}
-            onSetPreviewZoom={setPreviewZoom}
           />
         </section>
 

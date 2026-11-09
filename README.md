@@ -24,8 +24,8 @@ Built with **React 18**, **TypeScript**, and **Pure CSS (Material Design 3)**, r
 
 ### 2. Live Vector Preview
 - **Interactive Backgrounds**: Toggle between Checkerboard (transparency), Light, Dark, and Grid patterns.
-- **Precision Zoom**: Zoom In (+), Zoom Out (-), 100% Reset, and Fit-to-Frame.
-- **Metadata Chips**: Real-time display of viewBox coordinates, shape/path count, gradient count, and fill rules.
+- **Auto-Fitted Sizing**: Fluid auto-scaling vector viewport displaying vectors crisply and centered without distortion.
+- **Metadata Chips**: Real-time display of parsed gradient definitions and fill rules (EvenOdd / NonZero).
 
 ### 3. Jetpack Compose ImageVector Code Generation
 - Generates clean, idiomatic, copy-pasteable Kotlin code for Android and Compose Multiplatform:

@@ -17,7 +17,6 @@ export function useConverterState() {
   const [rawSvg, setRawSvg] = useState<string>(initialSample.svg);
   const [activeTab, setActiveTab] = useState<'imagevector' | 'svg'>('imagevector');
   const [previewBg, setPreviewBg] = useState<PreviewBackground>('checkerboard');
-  const [previewZoom, setPreviewZoom] = useState<number>(4);
 
   const [config, setConfig] = useState<ImageVectorConfig>({
     ...DEFAULT_IMAGE_VECTOR_CONFIG,
@@ -39,12 +38,6 @@ export function useConverterState() {
         defaultWidthDp: parsedDoc.width,
         defaultHeightDp: parsedDoc.height,
       }));
-      // Auto-adjust preview zoom based on viewBox size (e.g. 24x24 -> 8x, 128x128 -> 2x)
-      const maxDim = Math.max(parsedDoc.width || 24, parsedDoc.viewBox.width || 24);
-      if (maxDim <= 32) setPreviewZoom(8);
-      else if (maxDim <= 64) setPreviewZoom(4);
-      else if (maxDim <= 128) setPreviewZoom(2);
-      else setPreviewZoom(1);
 
       return { success: true, doc: parsedDoc };
     } catch (err: any) {
@@ -83,7 +76,6 @@ export function useConverterState() {
     config,
     activeTab,
     previewBg,
-    previewZoom,
     imageVectorCode,
     cleanSvgCode,
     currentCode,
@@ -92,6 +84,5 @@ export function useConverterState() {
     updateDocumentName,
     setActiveTab,
     setPreviewBg,
-    setPreviewZoom,
   };
 }
