@@ -85,8 +85,15 @@ export const KotlinHighlighter: React.FC<KotlinHighlighterProps> = ({
     return parts;
   };
 
+  const label = language === 'kotlin' ? 'Generated Kotlin ImageVector code' : 'Cleaned SVG XML code';
+
   return (
-    <pre className="code-scroll-area">
+    <pre
+      className="code-scroll-area"
+      tabIndex={0}
+      role="region"
+      aria-label={label}
+    >
       <code>{language === 'kotlin' ? highlightKotlin(code) : highlightXml(code)}</code>
     </pre>
   );

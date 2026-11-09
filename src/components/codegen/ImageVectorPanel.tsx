@@ -49,12 +49,20 @@ export const ImageVectorPanel: React.FC<ImageVectorPanelProps> = ({
   };
 
   return (
-    <div className="codegen-panel">
+    <section className="codegen-panel" aria-label="Jetpack Compose Code Generator">
       {/* Top Header with Tabs & Copy/Download Actions */}
       <div className="codegen-header">
-        <div className="codegen-tabs">
+        <div
+          className="codegen-tabs"
+          role="tablist"
+          aria-label="Output code format"
+        >
           <button
             type="button"
+            role="tab"
+            id="tab-imagevector"
+            aria-selected={activeTab === 'imagevector'}
+            aria-controls="panel-code-output"
             className={`codegen-tab-btn ${activeTab === 'imagevector' ? 'active' : ''}`}
             onClick={() => onTabChange('imagevector')}
           >
@@ -62,6 +70,10 @@ export const ImageVectorPanel: React.FC<ImageVectorPanelProps> = ({
           </button>
           <button
             type="button"
+            role="tab"
+            id="tab-svg"
+            aria-selected={activeTab === 'svg'}
+            aria-controls="panel-code-output"
             className={`codegen-tab-btn ${activeTab === 'svg' ? 'active' : ''}`}
             onClick={() => onTabChange('svg')}
           >
@@ -74,20 +86,28 @@ export const ImageVectorPanel: React.FC<ImageVectorPanelProps> = ({
             type="button"
             className="config-toggle-btn"
             onClick={() => setShowConfigOptions((prev) => !prev)}
-            title="Toggle generator configuration"
+            aria-expanded={showConfigOptions}
+            aria-controls="codegen-config-toolbar"
+            aria-label={showConfigOptions ? 'Collapse generator options' : 'Expand generator options'}
+            title={showConfigOptions ? 'Collapse generator options' : 'Expand generator options'}
           >
-            <Settings2 size={15} />
+            <Settings2 size={15} aria-hidden="true" />
             <span>Options</span>
-            {showConfigOptions ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+            {showConfigOptions ? (
+              <ChevronUp size={14} aria-hidden="true" />
+            ) : (
+              <ChevronDown size={14} aria-hidden="true" />
+            )}
           </button>
 
           <button
             type="button"
             className="action-pill-btn secondary"
             onClick={handleDownload}
+            aria-label={activeTab === 'imagevector' ? 'Download Kotlin source file (.kt)' : 'Download SVG file (.svg)'}
             title={activeTab === 'imagevector' ? 'Download Kotlin source file' : 'Download SVG file'}
           >
-            <Download size={14} />
+            <Download size={14} aria-hidden="true" />
             <span>Download</span>
           </button>
 
@@ -95,20 +115,34 @@ export const ImageVectorPanel: React.FC<ImageVectorPanelProps> = ({
             type="button"
             className={`action-pill-btn primary ${copied ? 'copied' : ''}`}
             onClick={handleCopy}
-            title="Copy code to clipboard"
+            aria-label={copied ? 'Code copied to clipboard' : 'Copy code to clipboard'}
+            title={copied ? 'Copied to clipboard' : 'Copy code to clipboard'}
           >
-            {copied ? <Check size={15} /> : <Copy size={15} />}
+            {copied ? <Check size={15} aria-hidden="true" /> : <Copy size={15} aria-hidden="true" />}
             <span>{copied ? 'Copied to Clipboard!' : 'Copy Code'}</span>
           </button>
+
+          {/* Screen reader live notification */}
+          <span className="sr-only" role="status" aria-live="polite">
+            {copied ? 'Code successfully copied to clipboard' : ''}
+          </span>
         </div>
       </div>
 
       {/* Expandable Configuration Toolbar */}
       {showConfigOptions && activeTab === 'imagevector' && (
-        <div className="codegen-config-bar">
+        <div
+          id="codegen-config-toolbar"
+          className="codegen-config-bar"
+          role="region"
+          aria-label="Code generator settings"
+        >
           <div className="config-field">
-            <label className="config-label">Icon Identifier</label>
+            <label htmlFor="config-icon-name" className="config-label">
+              Icon Identifier
+            </label>
             <input
+              id="config-icon-name"
               type="text"
               className="config-input"
               value={config.name}
@@ -118,8 +152,11 @@ export const ImageVectorPanel: React.FC<ImageVectorPanelProps> = ({
           </div>
 
           <div className="config-field">
-            <label className="config-label">Package Name</label>
+            <label htmlFor="config-package-name" className="config-label">
+              Package Name
+            </label>
             <input
+              id="config-package-name"
               type="text"
               className="config-input"
               value={config.packageName}
@@ -129,8 +166,9 @@ export const ImageVectorPanel: React.FC<ImageVectorPanelProps> = ({
           </div>
 
           <div className="config-checkbox-group">
-            <label className="config-checkbox-label">
+            <label htmlFor="config-generate-imports" className="config-checkbox-label">
               <input
+                id="config-generate-imports"
                 type="checkbox"
                 checked={config.generateImports}
                 onChange={(e) => onUpdateConfig({ generateImports: e.target.checked })}
@@ -142,12 +180,17 @@ export const ImageVectorPanel: React.FC<ImageVectorPanelProps> = ({
       )}
 
       {/* Code Display Area with Syntax Highlighting */}
-      <div className="codegen-body">
+      <div
+        id="panel-code-output"
+        className="codegen-body"
+        role="tabpanel"
+        aria-labelledby={activeTab === 'imagevector' ? 'tab-imagevector' : 'tab-svg'}
+      >
         <KotlinHighlighter
           code={currentCode}
           language={activeTab === 'imagevector' ? 'kotlin' : 'xml'}
         />
       </div>
-    </div>
+    </section>
   );
 };

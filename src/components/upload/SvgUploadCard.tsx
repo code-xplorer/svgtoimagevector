@@ -74,24 +74,37 @@ export const SvgUploadCard: React.FC<SvgUploadCardProps> = ({
   };
 
   return (
-    <div className="upload-card">
+    <section className="upload-card" aria-label="Upload SVG Section">
+      <h2 className="sr-only">Upload SVG</h2>
+
       <input
         ref={fileInputRef}
         type="file"
+        id="svg-file-upload-input"
         accept=".svg,image/svg+xml"
         style={{ display: 'none' }}
         onChange={handleFileChange}
+        aria-label="Upload SVG file from your computer"
       />
 
-      {/* Drop zone area */}
+      {/* Accessible Keyboard & Drag Drop zone area */}
       <div
         className={`drop-zone ${isDragOver ? 'drag-over' : ''}`}
+        role="button"
+        tabIndex={0}
+        aria-label="Upload SVG: click to choose file or drag and drop SVG here"
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         onClick={() => fileInputRef.current?.click()}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            fileInputRef.current?.click();
+          }
+        }}
       >
-        <div className="drop-zone-icon-circle">
+        <div className="drop-zone-icon-circle" aria-hidden="true">
           <UploadCloud size={24} color="var(--md-sys-color-primary)" />
         </div>
 
@@ -104,21 +117,22 @@ export const SvgUploadCard: React.FC<SvgUploadCardProps> = ({
       </div>
 
       {errorMessage && (
-        <div className="upload-error-banner">
-          <AlertCircle size={15} />
+        <div className="upload-error-banner" role="alert" aria-live="assertive">
+          <AlertCircle size={15} aria-hidden="true" />
           <span>{errorMessage}</span>
         </div>
       )}
 
-      {/* Quick Action Buttons & Sample Pills */}
-      <div className="upload-quick-bar">
+      {/* Quick Action Buttons */}
+      <div className="upload-quick-bar" role="toolbar" aria-label="Upload options">
         <button
           type="button"
           className="quick-action-btn"
           onClick={onOpenPasteModal}
+          aria-label="Paste SVG XML markup from clipboard"
           title="Paste raw SVG XML markup"
         >
-          <FileCode2 size={14} />
+          <FileCode2 size={14} aria-hidden="true" />
           <span>Paste SVG XML</span>
         </button>
 
@@ -126,12 +140,13 @@ export const SvgUploadCard: React.FC<SvgUploadCardProps> = ({
           type="button"
           className="quick-action-btn"
           onClick={onOpenSampleModal}
+          aria-label="Browse and select from sample vectors"
           title="Open full sample gallery"
         >
-          <Sparkles size={14} />
+          <Sparkles size={14} aria-hidden="true" />
           <span>Sample Gallery</span>
         </button>
       </div>
-    </div>
+    </section>
   );
 };

@@ -10,14 +10,24 @@ export const Header: React.FC<HeaderProps> = ({
   theme,
   onToggleTheme,
 }) => {
+  const themeLabel = theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+
   return (
-    <header className="studio-header">
+    <header className="studio-header" role="banner">
       <div className="header-left">
         <div className="app-branding">
-          <svg className="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg
+            className="logo-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            aria-hidden="true"
+            focusable="false"
+          >
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
           </svg>
-          <span className="brand-title">SVG to ImageVector</span>
+          <h1 className="brand-title">SVG to ImageVector</h1>
           <span className="app-badge">Jetpack Compose</span>
         </div>
       </div>
@@ -28,10 +38,15 @@ export const Header: React.FC<HeaderProps> = ({
           type="button"
           className="icon-button"
           onClick={onToggleTheme}
-          data-tooltip={theme === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
+          aria-label={themeLabel}
+          title={themeLabel}
           style={{ padding: '6px' }}
         >
-          {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+          {theme === 'dark' ? (
+            <Sun size={18} aria-hidden="true" />
+          ) : (
+            <Moon size={18} aria-hidden="true" />
+          )}
         </button>
       </div>
     </header>

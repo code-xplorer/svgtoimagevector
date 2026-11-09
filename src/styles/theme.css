@@ -1,11 +1,12 @@
 /* Material Design 3 Design Tokens (Light & Dark) - Blue (#3489eb) & White Theme */
 
 :root {
-  /* Blue (#3489eb) & White Light Palette */
-  --md-sys-color-primary: #3489eb;
+  /* Blue & White Light Palette (WCAG AA Compliant) */
+  --md-sys-color-primary: #1D70D8;
+  --md-sys-color-primary-light: #3489EB;
   --md-sys-color-on-primary: #FFFFFF;
   --md-sys-color-primary-container: #E6F1FD;
-  --md-sys-color-on-primary-container: #0C447D;
+  --md-sys-color-on-primary-container: #0A3D73;
   
   --md-sys-color-secondary: #475569;
   --md-sys-color-on-secondary: #FFFFFF;

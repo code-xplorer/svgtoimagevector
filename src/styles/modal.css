@@ -128,9 +128,13 @@
   background-color: var(--md-sys-color-surface-container-low);
   cursor: pointer;
   transition: all 0.2s ease;
+  width: 100%;
+  color: var(--md-sys-color-on-surface);
+  text-align: center;
 }
 
-.sample-card:hover {
+.sample-card:hover,
+.sample-card:focus-visible {
   border-color: var(--md-sys-color-primary);
   box-shadow: var(--md-sys-elevation-2);
   transform: translateY(-2px);

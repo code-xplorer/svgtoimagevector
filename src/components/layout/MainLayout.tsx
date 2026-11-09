@@ -40,6 +40,11 @@ export const MainLayout: React.FC = () => {
 
   return (
     <div className="studio-container">
+      {/* Skip to Main Content Link for Keyboard Navigation (WCAG 2.4.1) */}
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
+
       {/* Top Header */}
       <Header
         theme={theme}
@@ -47,9 +52,9 @@ export const MainLayout: React.FC = () => {
       />
 
       {/* Main Studio Workspace: 2-Column Responsive Layout */}
-      <main className="studio-workspace">
+      <main id="main-content" className="studio-workspace" tabIndex={-1}>
         {/* Left Column: Upload & Visual Preview */}
-        <section className="studio-column left-column">
+        <div className="studio-column left-column">
           <SvgUploadCard
             onLoadSvg={handleLoadSvg}
             onOpenPasteModal={() => setIsPasteOpen(true)}
@@ -62,10 +67,10 @@ export const MainLayout: React.FC = () => {
             previewBg={previewBg}
             onSetPreviewBg={setPreviewBg}
           />
-        </section>
+        </div>
 
         {/* Right Column: Jetpack Compose ImageVector Generator */}
-        <section className="studio-column right-column">
+        <div className="studio-column right-column">
           <ImageVectorPanel
             config={config}
             activeTab={activeTab}
@@ -73,7 +78,7 @@ export const MainLayout: React.FC = () => {
             onUpdateConfig={updateConfig}
             onTabChange={setActiveTab}
           />
-        </section>
+        </div>
       </main>
 
       {/* Modals */}

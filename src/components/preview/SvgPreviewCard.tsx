@@ -50,71 +50,97 @@ export const SvgPreviewCard: React.FC<SvgPreviewCardProps> = ({
   };
 
   return (
-    <div className="preview-card">
+    <section className="preview-card" aria-label="Vector Preview">
       {/* Header bar */}
       <div className="preview-card-header">
         <div className="preview-title-group">
-          <span className="preview-title">Vector Preview</span>
-          <span className="preview-dim-pill">
+          <h2 className="preview-title">Vector Preview</h2>
+          <span
+            className="preview-dim-pill"
+            aria-label={`Vector dimensions: ${width} by ${height} dp`}
+          >
             {width} × {height} dp
           </span>
         </div>
 
-        {/* Controls: Background switch only */}
+        {/* Controls: Accessible Background switch */}
         <div className="preview-actions">
-          <div className="preview-bg-selector" title="Change preview background">
+          <div
+            className="preview-bg-selector"
+            role="radiogroup"
+            aria-label="Preview background style"
+          >
             <button
               type="button"
+              role="radio"
+              aria-checked={previewBg === 'checkerboard'}
               className={`bg-opt-btn ${previewBg === 'checkerboard' ? 'active' : ''}`}
               onClick={() => onSetPreviewBg('checkerboard')}
+              aria-label="Checkerboard transparent background"
               title="Checkerboard (Transparency)"
             >
-              🏁
+              <span aria-hidden="true">🏁</span>
             </button>
             <button
               type="button"
+              role="radio"
+              aria-checked={previewBg === 'light'}
               className={`bg-opt-btn ${previewBg === 'light' ? 'active' : ''}`}
               onClick={() => onSetPreviewBg('light')}
+              aria-label="Light solid background"
               title="Light Background"
             >
-              ⚪
+              <span aria-hidden="true">⚪</span>
             </button>
             <button
               type="button"
+              role="radio"
+              aria-checked={previewBg === 'dark'}
               className={`bg-opt-btn ${previewBg === 'dark' ? 'active' : ''}`}
               onClick={() => onSetPreviewBg('dark')}
+              aria-label="Dark solid background"
               title="Dark Background"
             >
-              ⚫
+              <span aria-hidden="true">⚫</span>
             </button>
             <button
               type="button"
+              role="radio"
+              aria-checked={previewBg === 'grid'}
               className={`bg-opt-btn ${previewBg === 'grid' ? 'active' : ''}`}
               onClick={() => onSetPreviewBg('grid')}
+              aria-label="Dot grid pattern background"
               title="Grid Pattern"
             >
-              ⊞
+              <span aria-hidden="true">⊞</span>
             </button>
           </div>
         </div>
       </div>
 
       {/* Main visual viewport */}
-      <div className="preview-viewport" style={getBgStyle()}>
+      <div
+        className="preview-viewport"
+        style={getBgStyle()}
+        role="region"
+        aria-label="SVG graphic display viewport"
+      >
         <div
           className="preview-scaler"
+          role="img"
+          aria-label={`Rendered vector graphic for ${doc.name || 'imported vector'}`}
           dangerouslySetInnerHTML={{ __html: rawSvg }}
         />
       </div>
 
       {/* Footer metadata info chips (Fill Rules if present) */}
       {hasEvenOdd && (
-        <div className="preview-card-footer">
+        <div className="preview-card-footer" role="status">
           <div className="meta-chip info" title="Path fill type">
             <span>EvenOdd Fill</span>
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
 };
