@@ -7,8 +7,18 @@ import { ImageVectorPanel } from '../codegen/ImageVectorPanel';
 import { PasteSvgModal } from '../modals/PasteSvgModal';
 import { SampleGalleryModal } from '../modals/SampleGalleryModal';
 
+// Detect system color scheme preference
+const getSystemTheme = (): 'light' | 'dark' => {
+  if (typeof window !== 'undefined' && window.matchMedia) {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  return 'light';
+};
+
 export const MainLayout: React.FC = () => {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  // Always default to the system theme on launch
+  const [theme, setTheme] = useState<'light' | 'dark'>(getSystemTheme);
+  const [userOverridden, setUserOverridden] = useState(false);
   const [isPasteOpen, setIsPasteOpen] = useState(false);
   const [isSamplesOpen, setIsSamplesOpen] = useState(false);
 
@@ -30,7 +40,23 @@ export const MainLayout: React.FC = () => {
     window.document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
+  // Dynamically follow system theme changes unless the user manually toggles it
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) return;
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleSystemThemeChange = (e: MediaQueryListEvent) => {
+      if (!userOverridden) {
+        setTheme(e.matches ? 'dark' : 'light');
+      }
+    };
+
+    mediaQuery.addEventListener('change', handleSystemThemeChange);
+    return () => mediaQuery.removeEventListener('change', handleSystemThemeChange);
+  }, [userOverridden]);
+
   const handleToggleTheme = () => {
+    setUserOverridden(true);
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
   };
 
