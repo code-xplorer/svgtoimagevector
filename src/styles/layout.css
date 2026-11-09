@@ -1,0 +1,132 @@
+/* Studio Layout & Scaffolding */
+
+.studio-container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--md-sys-color-surface);
+}
+
+/* Studio Header */
+.studio-header {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background-color: var(--md-sys-color-surface-container);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  z-index: 20;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.app-branding {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--md-sys-color-on-surface);
+}
+
+.app-branding .logo-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--md-sys-color-primary);
+}
+
+.brand-title {
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.2px;
+}
+
+.app-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  border-radius: var(--md-sys-shape-corner-full);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-divider {
+  width: 1px;
+  height: 24px;
+  background-color: var(--md-sys-color-outline-variant);
+  margin: 0 4px;
+}
+
+/* Studio Workspace: 2-Column Grid Layout */
+.studio-workspace {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(380px, 480px) 1fr;
+  gap: 16px;
+  padding: 16px;
+  background-color: var(--md-sys-color-surface-dim);
+  overflow: hidden;
+}
+
+.studio-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.studio-column.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.studio-column.right-column {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .studio-workspace {
+    grid-template-columns: minmax(320px, 420px) 1fr;
+    gap: 12px;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 860px) {
+  .studio-workspace {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .studio-column.left-column {
+    overflow-y: visible;
+  }
+
+  .studio-column.right-column {
+    min-height: 520px;
+    height: auto;
+  }
+}
