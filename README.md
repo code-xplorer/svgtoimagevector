@@ -28,11 +28,21 @@ Built with **React 18**, **TypeScript**, and **Pure CSS (Material Design 3)**, r
 - **Metadata Chips**: Real-time display of parsed gradient definitions and fill rules (EvenOdd / NonZero).
 
 ### 3. Jetpack Compose ImageVector Code Generation
-- Generates clean, idiomatic, copy-pasteable Kotlin code for Android and Compose Multiplatform:
-  - **Material Icon Style (Cached Property)**: `public val MyIcon: ImageVector get() = ...` with cached `_myIcon` backing field.
-  - **Composable Remember**: `@Composable fun rememberMyIcon(): ImageVector`.
-  - **Lazy Val Property**: `public val MyIcon: ImageVector by lazy { ... }`.
-  - **Builder Only**: Raw `ImageVector.Builder(...)` block.
+- Exclusively generates the standard, idiomatic Jetpack Compose **Material Icon cached backing field** pattern:
+  ```kotlin
+  public val MyIcon: ImageVector
+      get() {
+          if (_myIcon != null) {
+              return _myIcon!!
+          }
+          _myIcon = ImageVector.Builder(...).apply {
+              ...
+          }.build()
+          return _myIcon!!
+      }
+
+  private var _myIcon: ImageVector? = null
+  ```
 - **Configurable Generator Options**:
   - Custom Icon Identifier name (auto-sanitized for valid Kotlin PascalCase identifier).
   - Custom Package Name (e.g. `com.example.ui.icons`).

@@ -444,11 +444,6 @@ export function generateImageVectorCode(
       imports.push('import androidx.compose.ui.geometry.Offset');
     }
 
-    if (config.format === 'remember') {
-      imports.push('import androidx.compose.runtime.Composable');
-      imports.push('import androidx.compose.runtime.remember');
-    }
-
     importsCode = (config.packageName ? `package ${config.packageName}\n\n` : '') + imports.join('\n') + '\n\n';
   }
 
@@ -469,10 +464,8 @@ export function generateImageVectorCode(
 ${nodesCode}
 }.build()`;
 
-  let body = '';
-
-  if (config.format === 'materialIcon') {
-    body = `public val ${vectorName}: ImageVector
+  // Always generate Material backing field cached pattern
+  const body = `public val ${vectorName}: ImageVector
     get() {
         if (${backingFieldName} != null) {
             return ${backingFieldName}!!
@@ -482,21 +475,6 @@ ${nodesCode}
     }
 
 private var ${backingFieldName}: ImageVector? = null`;
-  } else if (config.format === 'remember') {
-    body = `@Composable
-public fun remember${vectorName}(): ImageVector {
-    return remember {
-        ${builderBlock.split('\n').map((l, i) => (i === 0 ? l : '        ' + l)).join('\n')}
-    }
-}`;
-  } else if (config.format === 'property') {
-    body = `public val ${vectorName}: ImageVector by lazy {
-    ${builderBlock.split('\n').map((l, i) => (i === 0 ? l : '    ' + l)).join('\n')}
-}`;
-  } else {
-    // builderOnly
-    body = builderBlock;
-  }
 
   return importsCode + body;
 }

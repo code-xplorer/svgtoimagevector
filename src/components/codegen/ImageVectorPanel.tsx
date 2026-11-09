@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ImageVectorConfig, ImageVectorFormat } from '../../types/imagevector';
+import { ImageVectorConfig } from '../../types/imagevector';
 import { KotlinHighlighter } from './KotlinHighlighter';
 import { Copy, Check, Download, Settings2, Code2, ChevronDown, ChevronUp } from 'lucide-react';
 
@@ -127,20 +127,6 @@ export const ImageVectorPanel: React.FC<ImageVectorPanelProps> = ({
               onChange={(e) => onUpdateConfig({ packageName: e.target.value })}
               placeholder="com.example.ui.icons"
             />
-          </div>
-
-          <div className="config-field">
-            <label className="config-label">Kotlin DSL Format</label>
-            <select
-              className="config-select"
-              value={config.format}
-              onChange={(e) => onUpdateConfig({ format: e.target.value as ImageVectorFormat })}
-            >
-              <option value="materialIcon">Material Icon Val (Cached _backingField)</option>
-              <option value="remember">@Composable rememberIcon(): ImageVector</option>
-              <option value="property">Lazy val Icon: ImageVector by lazy</option>
-              <option value="builderOnly">ImageVector.Builder(...) only</option>
-            </select>
           </div>
 
           <div className="config-checkbox-group">
