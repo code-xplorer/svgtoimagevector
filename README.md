@@ -84,16 +84,15 @@ src/
 │   │   ├── ColorPicker.tsx      # MD3 color palette selector
 │   │   └── IconButton.tsx       # MD3 icon button
 │   ├── layout/
-│   │   ├── Header.tsx           # Top navigation bar with branding & quick actions
+│   │   ├── Header.tsx           # Top navigation bar with branding & theme toggle
 │   │   └── MainLayout.tsx       # 2-column responsive layout orchestrator
 │   ├── modals/
 │   │   ├── PasteSvgModal.tsx    # Raw SVG XML paste & convert modal
-│   │   ├── SampleGalleryModal.tsx # Visual gallery to choose test vectors
-│   │   └── SvgUploadModal.tsx   # File picker & drop dialog
+│   │   └── SampleGalleryModal.tsx # Visual gallery to choose test vectors
 │   ├── preview/
-│   │   └── SvgPreviewCard.tsx   # Interactive SVG preview with backgrounds & zoom
+│   │   └── SvgPreviewCard.tsx   # Interactive SVG preview with backgrounds
 │   └── upload/
-│       └── SvgUploadCard.tsx    # Drag-and-drop card & quick sample pills
+│       └── SvgUploadCard.tsx    # Drag-and-drop card & quick actions
 ├── core/
 │   ├── generator/
 │   │   ├── imageVectorGenerator.ts # Kotlin Jetpack Compose ImageVector DSL generator

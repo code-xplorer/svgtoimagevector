@@ -4,13 +4,11 @@ import { Header } from './Header';
 import { SvgUploadCard } from '../upload/SvgUploadCard';
 import { SvgPreviewCard } from '../preview/SvgPreviewCard';
 import { ImageVectorPanel } from '../codegen/ImageVectorPanel';
-import { SvgUploadModal } from '../modals/SvgUploadModal';
 import { PasteSvgModal } from '../modals/PasteSvgModal';
 import { SampleGalleryModal } from '../modals/SampleGalleryModal';
 
 export const MainLayout: React.FC = () => {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  const [isUploadOpen, setIsUploadOpen] = useState(false);
   const [isPasteOpen, setIsPasteOpen] = useState(false);
   const [isSamplesOpen, setIsSamplesOpen] = useState(false);
 
@@ -45,9 +43,6 @@ export const MainLayout: React.FC = () => {
       {/* Top Header */}
       <Header
         theme={theme}
-        onOpenUpload={() => setIsUploadOpen(true)}
-        onOpenPaste={() => setIsPasteOpen(true)}
-        onOpenSamples={() => setIsSamplesOpen(true)}
         onToggleTheme={handleToggleTheme}
       />
 
@@ -82,12 +77,6 @@ export const MainLayout: React.FC = () => {
       </main>
 
       {/* Modals */}
-      <SvgUploadModal
-        isOpen={isUploadOpen}
-        onClose={() => setIsUploadOpen(false)}
-        onImportSvg={handleLoadSvg}
-      />
-
       <PasteSvgModal
         isOpen={isPasteOpen}
         onClose={() => setIsPasteOpen(false)}

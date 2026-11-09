@@ -1,19 +1,13 @@
 import React from 'react';
-import { Upload, Sparkles, Sun, Moon, FileCode2 } from 'lucide-react';
+import { Sun, Moon } from 'lucide-react';
 
 interface HeaderProps {
   theme: 'light' | 'dark';
-  onOpenUpload: () => void;
-  onOpenPaste: () => void;
-  onOpenSamples: () => void;
   onToggleTheme: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   theme,
-  onOpenUpload,
-  onOpenPaste,
-  onOpenSamples,
   onToggleTheme,
 }) => {
   return (
@@ -29,41 +23,6 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
 
       <div className="header-right">
-        {/* Upload SVG button */}
-        <button
-          type="button"
-          className="action-pill-btn secondary"
-          onClick={onOpenUpload}
-          title="Upload .svg file"
-        >
-          <Upload size={14} />
-          <span>Upload SVG</span>
-        </button>
-
-        {/* Paste SVG XML button */}
-        <button
-          type="button"
-          className="action-pill-btn secondary"
-          onClick={onOpenPaste}
-          title="Paste raw SVG XML"
-        >
-          <FileCode2 size={14} />
-          <span>Paste XML</span>
-        </button>
-
-        {/* Sample Gallery button */}
-        <button
-          type="button"
-          className="action-pill-btn secondary"
-          onClick={onOpenSamples}
-          title="Browse ready-to-test sample vectors"
-        >
-          <Sparkles size={14} />
-          <span>Samples</span>
-        </button>
-
-        <div className="header-divider" />
-
         {/* Dark/Light Theme Toggle */}
         <button
           type="button"
