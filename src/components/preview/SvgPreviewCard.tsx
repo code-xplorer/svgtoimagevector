@@ -1,7 +1,6 @@
 import React from 'react';
 import { VectorDocument } from '../../types/vector';
 import { PreviewBackground } from '../../hooks/useConverterState';
-import { Eye } from 'lucide-react';
 
 interface SvgPreviewCardProps {
   document: VectorDocument;
@@ -55,7 +54,6 @@ export const SvgPreviewCard: React.FC<SvgPreviewCardProps> = ({
       {/* Header bar */}
       <div className="preview-card-header">
         <div className="preview-title-group">
-          <Eye size={16} className="preview-icon-primary" />
           <span className="preview-title">Vector Preview</span>
           <span className="preview-dim-pill">
             {width} × {height} dp

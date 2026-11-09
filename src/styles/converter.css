@@ -203,10 +203,6 @@
   gap: 8px;
 }
 
-.preview-icon-primary {
-  color: var(--md-sys-color-primary);
-}
-
 .preview-title {
   font-size: 13px;
   font-weight: 600;

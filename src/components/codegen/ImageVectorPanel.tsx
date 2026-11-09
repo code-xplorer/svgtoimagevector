@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ImageVectorConfig } from '../../types/imagevector';
 import { KotlinHighlighter } from './KotlinHighlighter';
-import { Copy, Check, Download, Settings2, Code2, ChevronDown, ChevronUp } from 'lucide-react';
+import { Copy, Check, Download, Settings2, ChevronDown, ChevronUp } from 'lucide-react';
 
 interface ImageVectorPanelProps {
   config: ImageVectorConfig;
@@ -58,7 +58,6 @@ export const ImageVectorPanel: React.FC<ImageVectorPanelProps> = ({
             className={`codegen-tab-btn ${activeTab === 'imagevector' ? 'active' : ''}`}
             onClick={() => onTabChange('imagevector')}
           >
-            <Code2 size={15} />
             <span>Compose ImageVector (.kt)</span>
           </button>
           <button
