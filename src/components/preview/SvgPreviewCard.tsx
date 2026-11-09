@@ -1,7 +1,7 @@
 import React from 'react';
 import { VectorDocument } from '../../types/vector';
 import { PreviewBackground } from '../../hooks/useConverterState';
-import { Eye, Palette } from 'lucide-react';
+import { Eye } from 'lucide-react';
 
 interface SvgPreviewCardProps {
   document: VectorDocument;
@@ -16,9 +16,8 @@ export const SvgPreviewCard: React.FC<SvgPreviewCardProps> = ({
   previewBg,
   onSetPreviewBg,
 }) => {
-  const { width, height, nodes, gradients } = doc;
+  const { width, height, nodes } = doc;
 
-  const gradientsCount = Object.keys(gradients).length;
   const hasEvenOdd = nodes.some((n) => n.fillRule === 'evenodd');
 
   // Background styling classes / styles
@@ -110,23 +109,12 @@ export const SvgPreviewCard: React.FC<SvgPreviewCardProps> = ({
         />
       </div>
 
-      {/* Footer metadata info chips (Gradients & Fill Rules if present) */}
-      {(gradientsCount > 0 || hasEvenOdd) && (
+      {/* Footer metadata info chips (Fill Rules if present) */}
+      {hasEvenOdd && (
         <div className="preview-card-footer">
-          {gradientsCount > 0 && (
-            <div className="meta-chip gradient" title="Gradients parsed">
-              <Palette size={13} />
-              <span>
-                {gradientsCount} {gradientsCount === 1 ? 'gradient' : 'gradients'}
-              </span>
-            </div>
-          )}
-
-          {hasEvenOdd && (
-            <div className="meta-chip info" title="Path fill type">
-              <span>EvenOdd Fill</span>
-            </div>
-          )}
+          <div className="meta-chip info" title="Path fill type">
+            <span>EvenOdd Fill</span>
+          </div>
         </div>
       )}
     </div>

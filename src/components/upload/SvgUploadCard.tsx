@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import { UploadCloud, FileCode2, Sparkles, AlertCircle } from 'lucide-react';
-import { SAMPLE_SVGS } from '../../assets/samples';
 
 interface SvgUploadCardProps {
   onLoadSvg: (svgText: string, name?: string) => void;
@@ -132,22 +131,6 @@ export const SvgUploadCard: React.FC<SvgUploadCardProps> = ({
           <Sparkles size={14} />
           <span>Sample Gallery</span>
         </button>
-
-        {/* Quick sample chips */}
-        <div className="quick-sample-chips">
-          <span className="chips-label">Quick test:</span>
-          {SAMPLE_SVGS.slice(0, 4).map((sample) => (
-            <button
-              key={sample.id}
-              type="button"
-              className="sample-mini-pill"
-              onClick={() => onLoadSvg(sample.svg, sample.name.replace(/\s+/g, ''))}
-              title={`Load ${sample.name}`}
-            >
-              {sample.name}
-            </button>
-          ))}
-        </div>
       </div>
     </div>
   );
